@@ -5,7 +5,15 @@ project(Desafio LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-add_executable(Desafio main.cpp)
+add_executable(Desafio main.cpp
+    combinaciones.cpp
+    combinaciones.h
+    estructura.cpp
+    estructura.h
+    mostrar.cpp
+    mostrar.h
+    tablero.cpp
+    tablero.h)
 
 include(GNUInstallDirs)
 install(TARGETS Desafio
