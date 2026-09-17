@@ -1,7 +1,7 @@
 #include "Tablero.h"
 
 int calcularbytesnecesarios(int filas, int columnas, int ){
-    int totalbytes = filas = columnas = bits_por_ficha;
+    int totalbits = filas * columnas * bits_por_ficha;
     int totalbytes = totalbits / 8;
     if (totalbits % 8 != 0) {
         totalbytes++;
@@ -9,6 +9,8 @@ int calcularbytesnecesarios(int filas, int columnas, int ){
     }
 
     return totalbytes;
+
+
 
 
 }
