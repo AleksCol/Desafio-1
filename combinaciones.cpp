@@ -35,3 +35,9 @@ static bool estamarcada(unsigned char* mascara, int columnas, int fila, int colu
     return (mascara[indice / 8] & (1 << (7 - (indice % 8)))) != 0;
 }
 
+bool marcarcombinaciones(unsigned char* tablero, int filas, int columnas, int* columna){
+    unsigned char* mascara = crearmascara(filas, columnas);
+    bool hubocomb = false;
+
+    //NO PUEDO MAS XD
+}
