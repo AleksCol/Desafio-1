@@ -7,8 +7,7 @@
 
 bool marcarcombinaciones(unsigned char* tablero, int filas, int columnas, int* contadorfichaespecial);
 bool colapsaryrellenar(unsigned char* tablero, int filas, int columnas);
+int resolvercascada(unsigned char* tablero, int filas, int columnas, int* contadorfichaespecial);
 
-int resolvercascada(unsigned char* tablero, int filas, int columnas, int* contadorfichaespecial)
 
-
-#endif // COMBINACIONES_H
+#endif
