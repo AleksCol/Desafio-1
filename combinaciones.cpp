@@ -17,4 +17,10 @@ static unsigned char* crearmascara(int filas, int columnas) {
      }
      return mascara;
 
+     //"BORRAR" Este bloque lo que hace es crear un array continuo de bits
+     // el objetivo es reservar la memoria dinamica exacta para que cada bit
+     // represente la casilla del tablero ocupando el menor espacio posible.
+
+
+
 }
