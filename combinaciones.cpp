@@ -21,6 +21,17 @@ static unsigned char* crearmascara(int filas, int columnas) {
      // el objetivo es reservar la memoria dinamica exacta para que cada bit
      // represente la casilla del tablero ocupando el menor espacio posible.
 
-
-
 }
+
+static void marcarenmascara(unsigned char* mascara, int columnas, int fila, int columna) {
+    int indice = fila * columnas + columna;
+
+    mascara[indice / 8] |= (1 << (7 - (indice % 8)));
+}
+
+static bool estamarcada(unsigned char* mascara, int columnas, int fila, int columna) {
+    int indice = fila * columnas + columna;
+
+    return (mascara[indice / 8] & (1 << (7 - (indice % 8)))) != 0;
+}
+
