@@ -1,6 +1,7 @@
 #include "combinaciones.h"
 #include <cstdlib>
-
+#include "estructura.h"
+#include "estructura.h"
 static unsigned char* crearmascara(int filas, int columnas) {
 
     int totalbits = filas * columnas;
@@ -38,6 +39,54 @@ static bool estamarcada(unsigned char* mascara, int columnas, int fila, int colu
 bool marcarcombinaciones(unsigned char* tablero, int filas, int columnas, int* columna){
     unsigned char* mascara = crearmascara(filas, columnas);
     bool hubocomb = false;
+    for (int f = 0; f < filas; f++) {
+        int c = 0;
+        while (c < columnas) {
+            // 1. Leer la ficha actual
+            int valorActual = obtenerFicha(tablero, f, c, columnas);
 
+            int j = c;
+            while (j < columnas && obtenerFicha(tablero, f, j, columnas) == valorActual) {
+                j++;
+            }
+            if (j - c >= 3) {
+                hubocomb = true;
+                // 4. Marcarlas todas en la máscara
+                for (int k=c;k<j;k++) {
+                    marcarenmascara(mascara,columnas,f,k);
+                }
+            }
+            c=j;
+        }
+    }
+    for(int f=0; f<columnas;f++){
+        int c= 0;
+        while(c<filas){
+            int valoractual = obtenerFicha(tablero,c,f,columnas);
+            int j=c;
+            while(j<filas && obtenerFicha(tablero,f,j,columnas)==valoractual){
+                j++;
+            }
+            if(j-c>=3){
+                hubocomb=true;
+                for(int k=c;k<j;k++){
+                    marcarenmascara(mascara,columnas,k,f);
+                }
+            }
+            c=j;
+        }
+    }
+    for (int f = 0; f < filas; f++) {
+        for (int c = 0; c < columnas; c++) {
+            if (estamarcada(mascara, columnas, f, c)) {
+                // ¿Qué función usamos para escribir en el tablero?
+                // ¿Qué valor representa una casilla libre?
+                asignarficha(tablero,f,c,6,columnas);
+            }
+        }
+    }
+    delete[] mascara;
+    return hubocomb;
     //NO PUEDO MAS XD
+    //Ya vemos que hacemos xd
 }
