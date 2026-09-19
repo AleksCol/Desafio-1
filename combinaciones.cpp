@@ -36,7 +36,7 @@ static bool estamarcada(unsigned char* mascara, int columnas, int fila, int colu
     return (mascara[indice / 8] & (1 << (7 - (indice % 8)))) != 0;
 }
 
-bool marcarcombinaciones(unsigned char* tablero, int filas, int columnas, int* columna){
+bool marcarcombinaciones(unsigned char* tablero, int filas, int columnas){ //tienes que explicarme por que pusiste un puntero al final. No le encontre lógica, lo borre para probar en main
     unsigned char* mascara = crearmascara(filas, columnas);
     bool hubocomb = false;
     for (int f = 0; f < filas; f++) {
