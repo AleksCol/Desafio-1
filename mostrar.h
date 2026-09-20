@@ -2,7 +2,7 @@
 #define MOSTRAR_H
 
 #endif // MOSTRAR_H
-
+#include "iostream"
 
 //Estas funciones se van a usar para la presentacion
 //del tablero en la pantalla. Modulo de una sola lectura
