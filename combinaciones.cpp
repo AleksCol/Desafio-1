@@ -36,13 +36,12 @@ static bool estamarcada(unsigned char* mascara, int columnas, int fila, int colu
     return (mascara[indice / 8] & (1 << (7 - (indice % 8)))) != 0;
 }
 
-bool marcarcombinaciones(unsigned char* tablero, int filas, int columnas){ //tienes que explicarme por que pusiste un puntero al final. No le encontre lógica, lo borre para probar en main
+bool marcarcombinaciones(unsigned char* tablero, int filas, int columnas){
     unsigned char* mascara = crearmascara(filas, columnas);
     bool hubocomb = false;
     for (int f = 0; f < filas; f++) {
         int c = 0;
         while (c < columnas) {
-            // 1. Leer la ficha actual
             int valorActual = obtenerFicha(tablero, f, c, columnas);
 
             int j = c;
@@ -51,26 +50,8 @@ bool marcarcombinaciones(unsigned char* tablero, int filas, int columnas){ //tie
             }
             if (j - c >= 3) {
                 hubocomb = true;
-                // 4. Marcarlas todas en la máscara
                 for (int k=c;k<j;k++) {
                     marcarenmascara(mascara,columnas,f,k);
-                }
-            }
-            c=j;
-        }
-    }
-    for(int f=0; f<columnas;f++){
-        int c= 0;
-        while(c<filas){
-            int valoractual = obtenerFicha(tablero,c,f,columnas);
-            int j=c;
-            while(j<filas && obtenerFicha(tablero,f,j,columnas)==valoractual){
-                j++;
-            }
-            if(j-c>=3){
-                hubocomb=true;
-                for(int k=c;k<j;k++){
-                    marcarenmascara(mascara,columnas,k,f);
                 }
             }
             c=j;
@@ -79,14 +60,13 @@ bool marcarcombinaciones(unsigned char* tablero, int filas, int columnas){ //tie
     for (int f = 0; f < filas; f++) {
         for (int c = 0; c < columnas; c++) {
             if (estamarcada(mascara, columnas, f, c)) {
-                // ¿Qué función usamos para escribir en el tablero?
-                // ¿Qué valor representa una casilla libre?
+
                 asignarficha(tablero,f,c,6,columnas);
             }
         }
     }
     delete[] mascara;
+
     return hubocomb;
-    //NO PUEDO MAS XD
-    //Ya vemos que hacemos xd
 }
+
