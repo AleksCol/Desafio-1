@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include "estructura.h"
 #include "estructura.h"
+#include"iostream"
 static unsigned char* crearmascara(int filas, int columnas) {
 
     int totalbits = filas * columnas;
@@ -61,7 +62,7 @@ bool marcarcombinaciones(unsigned char* tablero, int filas, int columnas){
         for (int c = 0; c < columnas; c++) {
             if (estamarcada(mascara, columnas, f, c)) {
 
-                asignarficha(tablero,f,c,6,columnas);
+                asignarficha(tablero,f,c,7,columnas);
             }
         }
     }
@@ -90,5 +91,29 @@ bool intercambiarFichas(unsigned char* tablero, int filas, int columnas,int f1, 
     asignarficha(tablero, f1, c1, ficha2, columnas);
     asignarficha(tablero, f2, c2, ficha1, columnas);
     return true;
+}
+void rellenarVacios(unsigned char* tablero, int filas, int columnas) {
+    for (int f = 0; f < filas; f++) {
+        for (int c = 0; c < columnas; c++) {
+            if (obtenerFicha(tablero, f, c, columnas) == 7) {
+                int nuevaFicha = rand() % 7;
+                asignarficha(tablero, f, c, nuevaFicha, columnas);
+            }
+        }
+    }
+}
+int procesarFichasEspeciales(unsigned char* tablero, int filas, int columnas,int &especiales) {
+    int totalEspeciales = 0;
+    for (int f = 0; f < filas; f++) {
+        for (int c = 0; c < columnas; c++) {
+            if (obtenerFicha(tablero, f, c, columnas) == 6) {
+                totalEspeciales++;
+                int fichaNormal = rand() % 6;
+                asignarficha(tablero, f, c, fichaNormal, columnas);
+            }
+        }
+    }
+    especiales=especiales+totalEspeciales;
+    return especiales;
 }
 

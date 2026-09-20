@@ -32,7 +32,11 @@ int main() {
     }
     std::cout << "\n=== TABLERO ===" << std::endl;
     marcarcombinaciones(tablero,filas,columnas);
+    rellenarVacios(tablero,filas,columnas);
+    int especial=0;
+    especial=procesarFichasEspeciales(tablero,filas,columnas,especial);
     mostrartableroficha(tablero, filas, columnas);
+    std::cout<<"tienes esta cantidad de especiales="<<especial<<"\n";
     bool flag=true;
     while (flag){
         std::cout<<"Por favor escribe 1 para hacer la combinación de fichas\nEscriba 2 para ver el tablero formato binario\nEscriba 3 Si quiere eliminar o agregar una fila o columna\n";
@@ -49,9 +53,11 @@ int main() {
             std::cout << "Columna ficha 2: "; std::cin >> c2;
             if (intercambiarFichas(tablero, filas, columnas, f1, c1, f2, c2)) {
                 marcarcombinaciones(tablero,filas,columnas);
+                rellenarVacios(tablero,filas,columnas);
+                especial=procesarFichasEspeciales(tablero,filas,columnas,especial);
                 mostrartableroficha(tablero, filas, columnas);
+                std::cout<<"tienes esta cantidad de especiales="<<especial<<"\n";
             }
-
         break;
 
     case 2:
@@ -59,7 +65,27 @@ int main() {
         break;
 
     case 3:
+        unsigned int pregunta;
+        std::cout<<"Escoge 1 para agregar fila\nEscoge 2 para eliminar fila\n";
+        switch (pregunta) {
+        case 1:
+            if(especial>0){
+                especial--;
+                agregarFila(tablero,filas,columnas);
+                }
+            else{
+                std::cout<<"No tienes suficientes fichas especiales para cambiar la dimensión del tablero";
+                break;}
+        case 2:
+            if(especial>0){
+                especial--;
+                eliminarFila(tablero,filas,columnas);}
+            else {std::cout<<"No tienes suficientes fichas especiales para cambiar la dimensión del tablero";
+                break;}
 
+        default:
+            break;
+        }
         break;
 
     case 4:

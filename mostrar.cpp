@@ -1,7 +1,7 @@
 #include "estructura.h"
 #include "mostrar.h"
 void mostrartableroficha(unsigned char* tablero, int filas, int columnas) {
-    char simbolos[] = {'A', 'B', 'C', 'D', 'E', 'F', '-', '*'};
+    char simbolos[] = {'A', 'B', 'C', 'D', 'E', 'F', '*', '-'};
     unsigned int contador=1;
     for (int f = 0; f < filas; f++) {
         std::cout<<contador;
