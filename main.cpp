@@ -9,19 +9,30 @@ int main() {
     bool flagini=true;
     while (flagini){
     int filas = 0, columnas = 0;
+        int meta=0;
+    std::cout<<"Hola jugador para comenzar elige la meta que quieres completar, en este juego tienes que recaudar una cantidad mayor de metas para poder ganar\nComo obtenemos esas metas?\nPara obtener las metas solo debes ir haciendo combinaciones de fichas para lograr tener una probabilidad de obtener una ficha especial\n Si esta supera al número de meta ganaste";
+    std::cout<<"Que se puede hacer con esas fichas especiales?\n Puedes agregar una fila más o una fila menos y reinicar el tablero para no quedarte estancado pero cada vez que lo hagas perderas una ficha especial\nAhora elige tu meta jugador:";
+    std::cout<<"La primera vez que se crea el tablero tienes probabilidades de obtener puntuacion especial para superar tu meta\n";
+    std::cin>>meta;
+    while(meta<=0){
+        std::cout<<"La meta tiene que ser mayor a 0 Que sentido tiene una vida sin metas?";
+        std::cin>>meta;
+    }
     std::cout << "Ingresa filas: ";
     std::cin >> filas;
     while(filas<=0){
-        std::cout<<"No se puede ingresar menos de 3 filas, tiene que ser al menos 3 ó mas"<<std::endl;
+        std::cout<<"No se puede ingresar menos de 0 filas, tiene que ser al menos 1"<<std::endl;
         std:: cin>>filas;
     }
+
     std::cout << "Ingresa columnas: ";
     std::cin >> columnas;
     while(columnas<=0){
         std::cout<<"No se puede ingresar menos de 0 columnas, tiene que ser al menos 1"<<std::endl;
         std:: cin>>columnas;
     }
-    int totalBits      = filas * columnas * 3;      //Borramos total bytes ya que, aunque queriamos tener memoria demás por si de pronto llegase a haber bits sobrantes y quisieramos hacer algo con ellos, ocasionaba que no se pudiese crear matrices con menos de 3 filas
+
+    int totalBits      = filas * columnas * 3;
     unsigned char* tablero = new unsigned char[totalBits];
     for (int i = 0; i < totalBits; i++) tablero[i] = 0;
     srand(time(0));
@@ -30,6 +41,7 @@ int main() {
             asignarficha(tablero, f, c, rand() % 6, columnas);
         }
     }
+
     std::cout << "\n=== TABLERO ===" << std::endl;
     marcarcombinaciones(tablero,filas,columnas);
     rellenarVacios(tablero,filas,columnas);
@@ -37,13 +49,37 @@ int main() {
     especial=procesarFichasEspeciales(tablero,filas,columnas,especial);
     mostrartableroficha(tablero, filas, columnas);
     std::cout<<"tienes esta cantidad de especiales="<<especial<<"\n";
+
     bool flag=true;
     while (flag){
+        if(especial>meta){
+            std::cout<<"Felicidades has ganado esta partida. Has superado la meta de fichas especiales\nQuieres volver a jugar otra partida?\nEscribe 1 para volver a jugar\n Escribe 2 para salir";
+            int pregunta;
+            std::cin>>pregunta;
+            while(pregunta!=1 && pregunta!=2){
+                std::cout<<"Escribe 1 para volver a jugar\nEscribe 2 para salir ";
+                std::cin>>pregunta;
+            }
+            if (pregunta==1){
+                flag=false;
+                delete[] tablero;
+                break;
+            }
+            else if(pregunta==2){
+                std::cout<<"gracias por jugar";
+                delete[] tablero;
+                return 0;
+
+            }
+
+        }
         std::cout<<"Por favor escribe 1 para hacer la combinación de fichas\nEscriba 2 para ver el tablero formato binario\nEscriba 3 Si quiere eliminar o agregar una fila o columna\n";
         std::cout<<"Escriba 4 si quiere salir del programa\n";
+        std::cout<<"Escriba 5 si quiere volver a jugar\n";
         int control=0;
         std::cin>>control;
         switch (control) {
+
     case 1:
              mostrartableroficha(tablero, filas, columnas);
             int f1, c1, f2, c2;
@@ -54,7 +90,7 @@ int main() {
             if (intercambiarFichas(tablero, filas, columnas, f1, c1, f2, c2)) {
                 marcarcombinaciones(tablero,filas,columnas);
                 rellenarVacios(tablero,filas,columnas);
-                especial=procesarFichasEspeciales(tablero,filas,columnas,especial);
+                procesarFichasEspeciales(tablero,filas,columnas,especial);
                 mostrartableroficha(tablero, filas, columnas);
                 std::cout<<"tienes esta cantidad de especiales="<<especial<<"\n";
             }
@@ -66,6 +102,7 @@ int main() {
 
     case 3:
         unsigned int pregunta;
+        std::cin>>pregunta;
         std::cout<<"Escoge 1 para agregar fila\nEscoge 2 para eliminar fila\n";
         switch (pregunta) {
         case 1:
@@ -76,6 +113,7 @@ int main() {
             else{
                 std::cout<<"No tienes suficientes fichas especiales para cambiar la dimensión del tablero";
                 break;}
+
         case 2:
             if(especial>0){
                 especial--;
@@ -90,8 +128,13 @@ int main() {
 
     case 4:
         std::cout<<"Gracias por jugar";
+        delete[] tablero;
         return 0;
 
+        break;
+    case 5:
+        std::cout<<"iniciando una nueva partida\n";
+        flag=false;
         break;
     default:
         break;
