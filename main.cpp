@@ -6,6 +6,8 @@
 #include "mostrar.h"
 #include "estructura.h"
 int main() {
+    bool flagini=true;
+    while (flagini){
     int filas = 0, columnas = 0;
     std::cout << "Ingresa filas: ";
     std::cin >> filas;
@@ -39,6 +41,16 @@ int main() {
         std::cin>>control;
         switch (control) {
     case 1:
+             mostrartableroficha(tablero, filas, columnas);
+            int f1, c1, f2, c2;
+            std::cout << "Elige las fichas que vas a escoger para intercambiar desde 1 hasta n\nFila ficha 1: ";    std::cin >> f1;
+            std::cout << "Columna ficha 1: "; std::cin >> c1;
+            std::cout << "Fila ficha 2: ";    std::cin >> f2;
+            std::cout << "Columna ficha 2: "; std::cin >> c2;
+            if (intercambiarFichas(tablero, filas, columnas, f1, c1, f2, c2)) {
+                marcarcombinaciones(tablero,filas,columnas);
+                mostrartableroficha(tablero, filas, columnas);
+            }
 
         break;
 
@@ -58,5 +70,5 @@ int main() {
     default:
         break;
     }
-    }
+    }}
 }
