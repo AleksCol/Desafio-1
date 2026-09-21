@@ -11,7 +11,8 @@ en lugar de un entero completo por ficha.
 - Santiago Ramírez Almeida
 
 ## VIDEO DE YOUTUBE
-[VIDEO](https://youtu.be/JQ1ZkrN1DzE)
+[VIDEO](https://youtu.be/JQ1ZkrN1DzE) AQUIIIIIIIIIIII SÍ JUSTO AQUI ESTA EL VIDEO
+
 
 ## INFORME FINAL
 [INFORME](https://docs.google.com/document/d/1TrMEv-O7tzdhXQNqllQoK55IgLpSQM_mN79ltT-dpd4/edit?usp=sharing)
