@@ -10,9 +10,9 @@ int main() {
     while (flagini){
     int filas = 0, columnas = 0;
         int meta=0;
-    std::cout<<"Hola jugador para comenzar elige la meta que quieres completar, en este juego tienes que recaudar una cantidad mayor de metas para poder ganar\nComo obtenemos esas metas?\nPara obtener las metas solo debes ir haciendo combinaciones de fichas para lograr tener una probabilidad de obtener una ficha especial\n Si esta supera al número de meta ganaste";
-    std::cout<<"Que se puede hacer con esas fichas especiales?\n Puedes agregar una fila más o una fila menos y reinicar el tablero para no quedarte estancado pero cada vez que lo hagas perderas una ficha especial\nAhora elige tu meta jugador:";
-    std::cout<<"La primera vez que se crea el tablero tienes probabilidades de obtener puntuacion especial para superar tu meta\n";
+    std::cout<<"Hola jugador para comenzar elige la meta que quieres completar, en este juego tienes que recaudar una cantidad mayor de metas para poder ganar\nComo obtenemos esas metas?\nPara obtener las metas solo debes ir haciendo combinaciones de fichas para lograr tener una probabilidad de obtener una ficha especial\n Si esta supera al número de meta ganaste\n";
+    std::cout<<"Que se puede hacer con esas fichas especiales?\nPuedes agregar una fila más o una fila menos y reinicar el tablero para no quedarte estancado\npero cada vez que lo hagas perderas una ficha especial";
+    std::cout<<"La primera vez que se crea el tablero tienes probabilidades de obtener puntuacion especial para superar tu meta\nAhora elige tu meta jugador:";
     std::cin>>meta;
     while(meta<=0){
         std::cout<<"La meta tiene que ser mayor a 0 Que sentido tiene una vida sin metas?";
@@ -102,13 +102,16 @@ int main() {
 
     case 3:
         unsigned int pregunta;
-        std::cin>>pregunta;
         std::cout<<"Escoge 1 para agregar fila\nEscoge 2 para eliminar fila\n";
+        std::cin>>pregunta;
         switch (pregunta) {
         case 1:
             if(especial>0){
                 especial--;
+                std::cout<<"Estas son las fichas especiales restantes:"<<especial<<std::endl;
                 agregarFila(tablero,filas,columnas);
+                mostrartableroficha(tablero,filas,columnas);
+                break;
                 }
             else{
                 std::cout<<"No tienes suficientes fichas especiales para cambiar la dimensión del tablero";
@@ -117,7 +120,11 @@ int main() {
         case 2:
             if(especial>0){
                 especial--;
-                eliminarFila(tablero,filas,columnas);}
+                std::cout<<"Estas son las fichas especiales restantes:"<<especial<<std::endl;
+                eliminarFila(tablero,filas,columnas);
+                mostrartableroficha(tablero,filas,columnas);
+                break;
+            }
             else {std::cout<<"No tienes suficientes fichas especiales para cambiar la dimensión del tablero";
                 break;}
 

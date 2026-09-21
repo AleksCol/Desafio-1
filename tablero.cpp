@@ -15,7 +15,7 @@
         tablero = nuevo;
         filas++;
         for (int c = 0; c < columnas; c++) {
-            asignarficha(tablero, filas - 1, c, rand() % 7, columnas);
+            asignarficha(tablero, filas - 1, c, rand() % 6, columnas);
         }
     }
     void eliminarFila(unsigned char*& tablero, int& filas, int columnas) {
